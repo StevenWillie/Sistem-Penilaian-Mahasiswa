@@ -342,5 +342,5 @@ Proyek ini berhasil memenuhi **SEMUA** ketentuan dari dosen dengan hasil yang **
 
 ---
 
-**Dibuat untuk Final Project Software Testing**  
+**Dibuat untuk Final Project Pengujian Perangkat Lunak**  
 **Semoga sukses! 🎉**

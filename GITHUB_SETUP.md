@@ -18,7 +18,7 @@ Panduan lengkap untuk setup repository GitHub dan CI/CD untuk proyek ini.
 2. Klik tombol **"+"** di pojok kanan atas → **"New repository"**
 3. Isi form:
    - **Repository name**: `sistem-penilaian-mahasiswa`
-   - **Description**: `Sistem Penilaian Mahasiswa - Final Project Software Testing`
+   - **Description**: `Sistem Penilaian Mahasiswa - Final Project Pengujian Perangkat Lunak`
    - **Visibility**: Public (agar badge CI/CD bisa terlihat)
    - **JANGAN** centang "Initialize with README" (karena sudah ada)
 4. Klik **"Create repository"**

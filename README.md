@@ -4,7 +4,7 @@
 ![Coverage](https://img.shields.io/badge/coverage-60%25-yellow)
 ![Node Version](https://img.shields.io/badge/node-%3E%3D18.0.0-brightgreen)
 
-Sistem Penilaian Mahasiswa adalah aplikasi REST API sederhana untuk mengelola data mahasiswa dan nilai mereka. Aplikasi ini dikembangkan sebagai Final Project mata kuliah Software Testing dengan implementasi automated testing dan Continuous Integration.
+Sistem Penilaian Mahasiswa adalah aplikasi REST API sederhana untuk mengelola data mahasiswa dan nilai mereka. Aplikasi ini dikembangkan sebagai Final Project mata kuliah Pengujian Perangkat Lunak dengan implementasi automated testing dan Continuous Integration.
 
 ## Fitur Utama
 
@@ -304,7 +304,7 @@ Request → Routes → Controller → Service → Model → DataStore
 
 ## Author
 
-Dibuat sebagai Final Project mata kuliah Software Testing
+Dibuat sebagai Final Project mata kuliah Pengujian Perangkat Lunak
 
 ## License
 

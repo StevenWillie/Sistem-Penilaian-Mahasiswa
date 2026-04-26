@@ -1,6 +1,6 @@
 # Panduan Pengumpulan Final Project
 
-Panduan lengkap untuk mengumpulkan Final Project Software Testing.
+Panduan lengkap untuk mengumpulkan Final Project Pengujian Perangkat Lunak.
 
 ---
 
@@ -202,12 +202,12 @@ zip -r submission.zip submission/
 
 ### Email Subject
 ```
-[Software Testing] Final Project - [NIM] - [Nama]
+[Pengujian Perangkat Lunak] Final Project - [NIM] - [Nama]
 ```
 
 ### Email Body
 ```
-Kepada Yth. Bapak/Ibu Dosen Software Testing,
+Kepada Yth. Bapak/Ibu Dosen Pengujian Perangkat Lunak,
 
 Dengan hormat,
 Saya yang bertanda tangan di bawah ini:
@@ -216,7 +216,7 @@ Nama  : [NAMA LENGKAP]
 NIM   : [NIM]
 Kelas : [KELAS]
 
-Dengan ini mengumpulkan Final Project mata kuliah Software Testing dengan detail sebagai berikut:
+Dengan ini mengumpulkan Final Project mata kuliah Pengujian Perangkat Lunak dengan detail sebagai berikut:
 
 Judul Proyek: Sistem Penilaian Mahasiswa
 GitHub Repository: https://github.com/YOUR_USERNAME/sistem-penilaian-mahasiswa
@@ -370,7 +370,7 @@ Jika ada pertanyaan:
 
 ## 🎉 Selamat!
 
-Anda telah menyelesaikan Final Project Software Testing dengan:
+Anda telah menyelesaikan Final Project Pengujian Perangkat Lunak dengan:
 - ✅ 42 test cases (37 unit + 5 integration)
 - ✅ 85% test coverage (target: 60%)
 - ✅ Automated CI/CD with GitHub Actions

@@ -1,7 +1,7 @@
 {
   "name": "sistem-penilaian-mahasiswa",
   "version": "1.0.0",
-  "description": "Sistem Penilaian Mahasiswa - Final Project Software Testing",
+  "description": "Sistem Penilaian Mahasiswa - Final Project Pengujian Perangkat Lunak",
   "main": "src/index.js",
   "scripts": {
     "start": "node src/index.js",
