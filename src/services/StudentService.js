@@ -90,7 +90,7 @@ class StudentService {
   }
 
   getTopStudents(limit = 5) {
-    return this.students
+    return [...this.students]
       .sort((a, b) => b.calculateGPA() - a.calculateGPA())
       .slice(0, limit);
   }

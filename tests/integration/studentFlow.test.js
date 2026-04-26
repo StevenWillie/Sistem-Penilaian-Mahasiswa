@@ -53,7 +53,10 @@ describe('Student Flow Integration Tests', () => {
     // Create multiple students with different GPAs
     const student1 = await request(app)
       .post('/api/students')
-      .send({ nim: '1111111111', name: 'Student A', major: 'CS' });
+      .send({ nim: '4444444444', name: 'Student A', major: 'CS' });
+    
+    expect(student1.status).toBe(201);
+    expect(student1.body.data).toBeDefined();
     
     await request(app)
       .post(`/api/students/${student1.body.data.id}/grades`)
@@ -61,7 +64,10 @@ describe('Student Flow Integration Tests', () => {
 
     const student2 = await request(app)
       .post('/api/students')
-      .send({ nim: '2222222222', name: 'Student B', major: 'CS' });
+      .send({ nim: '5555555555', name: 'Student B', major: 'CS' });
+    
+    expect(student2.status).toBe(201);
+    expect(student2.body.data).toBeDefined();
     
     await request(app)
       .post(`/api/students/${student2.body.data.id}/grades`)

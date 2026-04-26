@@ -20,20 +20,20 @@ describe('API Integration Tests', () => {
     const response = await request(app)
       .post('/api/students')
       .send({
-        nim: '1234567890',
+        nim: '6666666666',
         name: 'John Doe',
         major: 'Computer Science'
       });
 
     expect(response.status).toBe(201);
     expect(response.body.success).toBe(true);
-    expect(response.body.data.nim).toBe('1234567890');
+    expect(response.body.data.nim).toBe('6666666666');
   });
 
   test('should get all students via GET /api/students', async () => {
     await request(app)
       .post('/api/students')
-      .send({ nim: '1234567890', name: 'John Doe', major: 'CS' });
+      .send({ nim: '7777777777', name: 'Test User', major: 'CS' });
 
     const response = await request(app).get('/api/students');
 
@@ -45,8 +45,11 @@ describe('API Integration Tests', () => {
   test('should add grade to student via POST /api/students/:id/grades', async () => {
     const createRes = await request(app)
       .post('/api/students')
-      .send({ nim: '1234567890', name: 'John Doe', major: 'CS' });
+      .send({ nim: '3333333333', name: 'Jane Smith', major: 'IS' });
 
+    expect(createRes.status).toBe(201);
+    expect(createRes.body.data).toBeDefined();
+    
     const studentId = createRes.body.data.id;
 
     const response = await request(app)

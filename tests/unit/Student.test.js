@@ -42,3 +42,4 @@ describe('Student Model - Unit Tests', () => {
       student.addGrade('', 85);
     }).toThrow('Subject cannot be empty');
   });
+});

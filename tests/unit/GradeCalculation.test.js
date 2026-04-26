@@ -36,3 +36,4 @@ describe('Grade Calculation - Unit Tests', () => {
     expect(student.calculateLetterGrade(30)).toBe('E');
     expect(student.calculateLetterGrade(49)).toBe('E');
   });
+});
