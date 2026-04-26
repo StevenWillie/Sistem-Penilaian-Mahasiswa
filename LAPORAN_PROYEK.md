@@ -401,7 +401,6 @@ Pipeline berjalan pada multiple Node.js versions:
 
 ---
 
-**Dibuat oleh**: [Nama Mahasiswa]  
-**NIM**: [NIM Mahasiswa]  
-**Mata Kuliah**: Software Testing  
-**Tanggal**: [Tanggal Pengumpulan]
+**Dibuat oleh**: Steven Willie  
+**NIM**: 03081230044
+**Mata Kuliah**: Pengujian Perangkat Lunak
