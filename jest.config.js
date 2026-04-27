@@ -18,5 +18,6 @@ module.exports = {
     '**/tests/**/*.test.js'
   ],
   verbose: true,
-  testTimeout: 10000
+  testTimeout: 10000,
+  maxWorkers: 1  // Run tests serially to avoid database conflicts
 };

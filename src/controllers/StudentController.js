@@ -5,10 +5,10 @@ class StudentController {
     this.studentService = new StudentService();
   }
 
-  createStudent(req, res) {
+  async createStudent(req, res) {
     try {
       const { nim, name, major } = req.body;
-      const student = this.studentService.createStudent(nim, name, major);
+      const student = await this.studentService.createStudent(nim, name, major);
       
       res.status(201).json({
         success: true,
@@ -23,9 +23,9 @@ class StudentController {
     }
   }
 
-  getAllStudents(req, res) {
+  async getAllStudents(req, res) {
     try {
-      const students = this.studentService.getAllStudents();
+      const students = await this.studentService.getAllStudents();
       
       res.status(200).json({
         success: true,
@@ -39,10 +39,10 @@ class StudentController {
     }
   }
 
-  getStudentById(req, res) {
+  async getStudentById(req, res) {
     try {
       const id = parseInt(req.params.id);
-      const student = this.studentService.getStudentById(id);
+      const student = await this.studentService.getStudentById(id);
       
       res.status(200).json({
         success: true,
@@ -56,12 +56,12 @@ class StudentController {
     }
   }
 
-  addGrade(req, res) {
+  async addGrade(req, res) {
     try {
       const id = parseInt(req.params.id);
       const { subject, score } = req.body;
       
-      const student = this.studentService.addGradeToStudent(id, subject, score);
+      const student = await this.studentService.addGradeToStudent(id, subject, score);
       
       res.status(200).json({
         success: true,
@@ -76,10 +76,10 @@ class StudentController {
     }
   }
 
-  deleteStudent(req, res) {
+  async deleteStudent(req, res) {
     try {
       const id = parseInt(req.params.id);
-      this.studentService.deleteStudent(id);
+      await this.studentService.deleteStudent(id);
       
       res.status(200).json({
         success: true,
@@ -93,10 +93,10 @@ class StudentController {
     }
   }
 
-  getTopStudents(req, res) {
+  async getTopStudents(req, res) {
     try {
       const limit = parseInt(req.query.limit) || 5;
-      const students = this.studentService.getTopStudents(limit);
+      const students = await this.studentService.getTopStudents(limit);
       
       res.status(200).json({
         success: true,

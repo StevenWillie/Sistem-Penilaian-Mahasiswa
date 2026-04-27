@@ -10,6 +10,21 @@ jobs:
   test:
     runs-on: ubuntu-latest
 
+    services:
+      mysql:
+        image: mysql:8.0
+        env:
+          MYSQL_ROOT_PASSWORD: ''
+          MYSQL_ALLOW_EMPTY_PASSWORD: 'yes'
+          MYSQL_DATABASE: db_mahasiswa
+        ports:
+          - 3306:3306
+        options: >-
+          --health-cmd="mysqladmin ping"
+          --health-interval=10s
+          --health-timeout=5s
+          --health-retries=3
+
     strategy:
       matrix:
         node-version: [18.x, 20.x]
@@ -27,7 +42,21 @@ jobs:
     - name: Install dependencies
       run: npm ci
 
+    - name: Setup MySQL Database
+      run: |
+        mysql -h 127.0.0.1 -u root -e "CREATE DATABASE IF NOT EXISTS db_mahasiswa;"
+        mysql -h 127.0.0.1 -u root db_mahasiswa < database/setup.sql
+
+    - name: Verify application build
+      run: node -c src/index.js
+
     - name: Run tests with coverage
+      env:
+        DB_HOST: 127.0.0.1
+        DB_USER: root
+        DB_PASSWORD: ''
+        DB_NAME: db_mahasiswa
+        NODE_ENV: test
       run: npm test
 
     - name: Upload coverage to Codecov

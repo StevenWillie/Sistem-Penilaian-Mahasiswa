@@ -1,10 +1,14 @@
 const Student = require('../models/Student');
-const DataStore = require('../utils/DataStore');
+const MySQLStore = require('../utils/MySQLStore');
 
 class StudentService {
   constructor() {
-    this.dataStore = new DataStore();
-    this.students = this.dataStore.loadStudents();
+    this.dataStore = new MySQLStore();
+    this.students = [];
+  }
+
+  async initialize() {
+    this.students = await this.dataStore.loadStudents();
   }
 
   validateNIM(nim) {
@@ -22,7 +26,7 @@ class StudentService {
     return name.trim().length >= 3;
   }
 
-  createStudent(nim, name, major) {
+  async createStudent(nim, name, major) {
     if (!this.validateNIM(nim)) {
       throw new Error('NIM must be 10 digits');
     }
@@ -35,24 +39,16 @@ class StudentService {
       throw new Error('Major cannot be empty');
     }
 
-    // Check duplicate NIM
-    if (this.students.find(s => s.nim === nim)) {
-      throw new Error('NIM already exists');
-    }
-
-    const id = this.students.length > 0 
-      ? Math.max(...this.students.map(s => s.id)) + 1 
-      : 1;
-
-    const student = new Student(id, nim, name, major);
-    this.students.push(student);
-    this.dataStore.saveStudents(this.students);
+    const student = new Student(null, nim, name, major);
+    const savedStudent = await this.dataStore.saveStudent(student);
     
-    return student;
+    await this.initialize(); // Reload students
+    
+    return savedStudent;
   }
 
-  getStudentById(id) {
-    const student = this.students.find(s => s.id === id);
+  async getStudentById(id) {
+    const student = await this.dataStore.getStudentById(id);
     if (!student) {
       throw new Error('Student not found');
     }
@@ -67,29 +63,35 @@ class StudentService {
     return student;
   }
 
-  getAllStudents() {
+  async getAllStudents() {
+    await this.initialize();
     return this.students;
   }
 
-  addGradeToStudent(id, subject, score) {
-    const student = this.getStudentById(id);
+  async addGradeToStudent(id, subject, score) {
+    const student = await this.getStudentById(id);
     student.addGrade(subject, score);
-    this.dataStore.saveStudents(this.students);
+    
+    // Save grade to database
+    const grade = student.grades[student.grades.length - 1];
+    await this.dataStore.addGrade(id, subject, score, grade.letterGrade);
+    
     return student;
   }
 
-  deleteStudent(id) {
-    const index = this.students.findIndex(s => s.id === id);
-    if (index === -1) {
+  async deleteStudent(id) {
+    const student = await this.getStudentById(id);
+    if (!student) {
       throw new Error('Student not found');
     }
     
-    this.students.splice(index, 1);
-    this.dataStore.saveStudents(this.students);
+    await this.dataStore.deleteStudent(id);
+    await this.initialize(); // Reload students
     return true;
   }
 
-  getTopStudents(limit = 5) {
+  async getTopStudents(limit = 5) {
+    await this.initialize();
     return [...this.students]
       .sort((a, b) => b.calculateGPA() - a.calculateGPA())
       .slice(0, limit);

@@ -67,10 +67,17 @@ git push -u origin main
 4. Klik workflow untuk melihat detail
 
 ### Workflow akan:
+- ✅ Setup MySQL database service
 - ✅ Install dependencies
+- ✅ Verify application build
 - ✅ Run all tests
 - ✅ Generate coverage report
 - ✅ Test pada Node.js 18.x dan 20.x
+
+**MySQL Service:**
+- GitHub Actions menggunakan MySQL 8.0 container
+- Database `db_mahasiswa` di-setup otomatis
+- Integration tests berjalan dengan database real
 
 ### Jika Workflow Gagal:
 - Klik workflow yang gagal

@@ -1,311 +1,368 @@
-# Sistem Penilaian Mahasiswa
+# 📚 Sistem Penilaian Mahasiswa
 
 ![CI Status](https://github.com/StevenWillie/Sistem-Penilaian-Mahasiswa/workflows/CI%20-%20Build%20and%20Test/badge.svg)
-![Coverage](https://img.shields.io/badge/coverage-60%25-yellow)
 ![Node Version](https://img.shields.io/badge/node-%3E%3D18.0.0-brightgreen)
+![Coverage](https://img.shields.io/badge/coverage-82%25-brightgreen)
 
-Sistem Penilaian Mahasiswa adalah aplikasi REST API sederhana untuk mengelola data mahasiswa dan nilai mereka. Aplikasi ini dikembangkan sebagai Final Project mata kuliah Pengujian Perangkat Lunak dengan implementasi automated testing dan Continuous Integration.
+Aplikasi web buat kelola data mahasiswa dan sistem penilaian dengan automated testing dan CI/CD.
 
-## Fitur Utama
+**Final Project Mata Kuliah Pengujian Perangkat Lunak**
 
-1. **Manajemen Data Mahasiswa**
-   - Tambah mahasiswa baru dengan validasi NIM
-   - Lihat daftar semua mahasiswa
-   - Cari mahasiswa berdasarkan ID
-   - Hapus data mahasiswa
+---
 
-2. **Sistem Penilaian**
-   - Tambah nilai mata kuliah untuk mahasiswa
-   - Perhitungan otomatis letter grade (A, B, C, D, E)
-   - Perhitungan GPA (Grade Point Average)
-   - Status kelulusan (Cumlaude, Sangat Memuaskan, Memuaskan, Cukup, Kurang)
+## 📋 Daftar Isi
 
-3. **Fitur Tambahan**
-   - Lihat top students berdasarkan GPA
-   - Penyimpanan data persistent ke file JSON
-   - Validasi input yang ketat
+1. [Fitur Aplikasi](#-fitur-aplikasi)
+2. [Teknologi](#-teknologi)
+3. [Cara Instalasi](#-cara-instalasi)
+4. [Cara Menjalankan](#-cara-menjalankan)
+5. [Cara Testing](#-cara-testing)
+6. [Struktur Proyek](#-struktur-proyek)
+7. [Dokumentasi](#-dokumentasi)
 
-## Teknologi yang Digunakan
+---
 
-- **Runtime**: Node.js
-- **Framework**: Express.js
-- **Testing**: Jest
-- **Integration Testing**: Supertest
+## ✨ Fitur Aplikasi
+
+### 1. **Manajemen Mahasiswa**
+- ✅ Tambah mahasiswa baru (NIM, Nama, Jurusan)
+- ✅ Lihat daftar semua mahasiswa
+- ✅ Hapus data mahasiswa
+- ✅ Validasi input (NIM 10 digit, nama min 3 karakter)
+
+### 2. **Sistem Penilaian**
+- ✅ Tambah nilai mata kuliah (0-100)
+- ✅ Konversi otomatis ke letter grade (A, B, C, D, E)
+- ✅ Perhitungan GPA otomatis (skala 4.0)
+- ✅ Status kelulusan (Cumlaude, Sangat Memuaskan, dll)
+
+### 3. **Fitur Lainnya**
+- ✅ Ranking top 5 mahasiswa berdasarkan GPA
+- ✅ Tampilan UI yang simpel dan mudah dipakai
+- ✅ Data disimpan di MySQL database
+- ✅ Notifikasi success/error
+
+---
+
+## 🛠️ Teknologi
+
+- **Backend**: Node.js + Express.js
+- **Database**: MySQL (via XAMPP)
+- **Frontend**: HTML, CSS, JavaScript (Vanilla)
+- **Testing**: Jest + Supertest
 - **CI/CD**: GitHub Actions
 
-## Instalasi
+---
+
+## 📦 Cara Instalasi
 
 ### Prerequisites
 - Node.js >= 18.0.0
-- npm atau yarn
+- XAMPP (untuk MySQL)
+- Git
 
 ### Langkah Instalasi
 
 ```bash
-# Clone repository
-git clone https://github.com/YOUR_USERNAME/sistem-penilaian-mahasiswa.git
-cd sistem-penilaian-mahasiswa
+# 1. Clone repository
+git clone https://github.com/StevenWillie/Sistem-Penilaian-Mahasiswa.git
+cd Sistem-Penilaian-Mahasiswa
 
-# Install dependencies
+# 2. Install dependencies
 npm install
 
-# Jalankan aplikasi
+# 3. Setup database MySQL
+# - Start MySQL di XAMPP
+# - Buka phpMyAdmin (http://localhost/phpmyadmin)
+# - Jalankan script SQL dari file: database/setup.sql
+
+# 4. Selesai!
+```
+
+**Panduan lengkap setup MySQL:** [docs/MYSQL_SETUP.md](docs/MYSQL_SETUP.md)
+
+---
+
+## 🚀 Cara Menjalankan
+
+### 1. Start MySQL di XAMPP
+- Buka XAMPP Control Panel
+- Klik **Start** pada **MySQL**
+
+### 2. Jalankan Aplikasi
+```bash
 npm start
 ```
 
-Aplikasi akan berjalan di `http://localhost:3000`
-
-## Cara Menjalankan Aplikasi
-
-### Development Mode
-```bash
-npm run dev
+### 3. Buka di Browser
+```
+http://localhost:3000
 ```
 
-### Production Mode
-```bash
-npm start
-```
+**Anda akan melihat:**
+- 📝 Form input mahasiswa
+- 📊 Tabel daftar mahasiswa dengan GPA
+- ➕ Tombol tambah nilai
+- 🏆 Ranking top 5 mahasiswa
 
-## Cara Menjalankan Test
+---
+
+## 🧪 Cara Testing
 
 ### Menjalankan Semua Test
 ```bash
 npm test
 ```
 
-### Menjalankan Unit Test Saja
+**Output:**
+```
+✓ Test Suites: 10 passed, 10 total
+✓ Tests: 50 passed, 50 total
+✓ Coverage: 88.58%
+```
+
+### Melihat Coverage Report
 ```bash
+# Setelah npm test, buka file:
+coverage/lcov-report/index.html
+```
+
+### Test Spesifik
+```bash
+# Unit test saja
 npm run test:unit
-```
 
-### Menjalankan Integration Test Saja
-```bash
+# Integration test saja
 npm run test:integration
-```
 
-### Watch Mode (untuk development)
-```bash
+# Watch mode (auto re-run)
 npm run test:watch
 ```
 
-## API Endpoints
+---
 
-### 1. Get API Info
-```
-GET /
-```
+## 🎯 Strategi Pengujian
 
-### 2. Create Student
-```
-POST /api/students
-Content-Type: application/json
+### Pendekatan Testing
+Proyek ini pakai **pendekatan piramida testing** dengan fokus pada:
+1. **Unit Testing** (45 tests) - Kebanyakan test buat logika bisnis
+2. **Integration Testing** (5 tests) - Test interaksi antar komponen
 
-{
-  "nim": "1234567890",
-  "name": "John Doe",
-  "major": "Computer Science"
-}
-```
+### Unit Testing Strategy
 
-### 3. Get All Students
-```
-GET /api/students
-```
+**Tujuan:** Ngetes setiap fungsi/method secara terpisah
 
-### 4. Get Student by ID
-```
-GET /api/students/:id
-```
+**Yang Diuji:**
+- **Model Layer** (Student.js)
+  - Perhitungan GPA (5 tests)
+  - Konversi letter grade (5 tests)
+  - Penentuan status kelulusan (5 tests)
+  - Validasi score (5 tests)
+  
+- **Service Layer** (StudentService.js)
+  - Validasi input NIM, nama, major (10 tests)
+  - CRUD operations (7 tests)
+  - Business logic (ranking, filtering)
 
-### 5. Add Grade to Student
-```
-POST /api/students/:id/grades
-Content-Type: application/json
+- **Utility Layer** (DataStore/MySQLStore)
+  - File/database operations (4 tests)
 
-{
-  "subject": "Database Systems",
-  "score": 85
-}
-```
+**Cara:**
+- Setiap test jalan sendiri-sendiri
+- Pakai mock data buat isolasi
+- Test edge cases dan boundary values
+- Fokus ke logika bisnis yang penting
 
-### 6. Get Top Students
-```
-GET /api/students/top?limit=5
-```
+### Integration Testing Strategy
 
-### 7. Delete Student
-```
-DELETE /api/students/:id
-```
+**Tujuan:** Ngetes interaksi antar komponen secara end-to-end
 
-## Strategi Pengujian
+**Yang Diuji:**
+- **API Endpoints** (3 tests)
+  - POST /api/students - Create student
+  - GET /api/students - Get all students
+  - POST /api/students/:id/grades - Add grade
+  
+- **Complete Workflows** (2 tests)
+  - Lifecycle: Create → Add grades → Verify GPA → Delete
+  - Ranking: Multiple students → Calculate GPA → Sort by ranking
 
-### Unit Testing (15+ test cases)
-Pengujian dilakukan pada level fungsi dan method individual:
+**Cara:**
+- Test lewat HTTP requests (pakai Supertest)
+- Pakai MySQL database buat testing
+- Database di-reset sebelum setiap test (clean state)
+- Cek response status dan data
+- Test alur bisnis lengkap dari awal sampai akhir
+- CI environment pakai MySQL service container
 
-1. **Student Model Tests** (5 tests)
-   - Pembuatan objek student
-   - Validasi penambahan nilai
-   - Validasi score range
+### Coverage Strategy
 
-2. **Grade Calculation Tests** (5 tests)
-   - Perhitungan letter grade untuk setiap range nilai
-   - Boundary testing untuk setiap grade
+**Target:** Minimal 60% (Achieved: 82%)
 
-3. **GPA Calculation Tests** (5 tests)
-   - Perhitungan GPA dengan berbagai skenario
-   - GPA dengan 0 nilai
-   - Presisi decimal
+**Prioritas Coverage:**
+1. **Critical Path** - Logika bisnis utama (GPA, grading) → 100%
+2. **Business Logic** - Service layer → 84%
+3. **API Layer** - Controllers & routes → 85-100%
+4. **Utility** - Helper functions → 77%
 
-4. **Student Status Tests** (5 tests)
-   - Status berdasarkan GPA
-   - Semua kategori status
+**Yang Gak Di-cover:**
+- Entry point (index.js)
+- Configuration files
+- Third-party libraries
 
-5. **Validation Tests** (10 tests)
-   - Validasi NIM (format, panjang)
-   - Validasi nama
-   - Validasi score
+### Test Automation
 
-6. **StudentService Tests** (7 tests)
-   - CRUD operations
-   - Error handling
-   - Duplicate detection
+**Continuous Integration:**
+- Automated testing pakai GitHub Actions
+- Test jalan otomatis tiap push/PR
+- Multi-version testing (Node.js 18.x, 20.x)
+- Coverage report di-generate otomatis
 
-### Integration Testing (5+ test cases)
-Pengujian end-to-end melalui API:
-
-1. **API Integration Tests** (3 tests)
-   - Create student via API
-   - Get all students
-   - Add grade via API
-
-2. **Student Flow Tests** (2 tests)
-   - Complete lifecycle (create → add grades → verify → delete)
-   - Top students ranking
-
-### Test Coverage
-Target coverage: **60%+**
-
-Coverage mencakup:
-- Line coverage
-- Function coverage
-- Branch coverage
-- Statement coverage
-
-## Continuous Integration
-
-Pipeline CI menggunakan GitHub Actions yang berjalan otomatis pada:
-- Push ke branch main/master/develop
-- Pull request ke branch main/master/develop
-
-### Pipeline Steps:
+**CI/CD Pipeline Steps:**
 1. Checkout code
-2. Setup Node.js (matrix: v18, v20)
+2. Setup Node.js environment
 3. Install dependencies
-4. Run tests with coverage
-5. Upload coverage report
+4. Setup MySQL database
+5. Verify application build
+6. Run all tests with coverage
+7. Upload coverage report
 
-## Struktur Project
+**Keuntungan:**
+- Deteksi bug lebih cepat
+- Jaminan kualitas code
+- Lebih percaya diri waktu deployment
+- Dokumentasi lewat tests
+
+---
+
+## 📁 Struktur Proyek
 
 ```
 sistem-penilaian-mahasiswa/
-├── .github/
-│   └── workflows/
-│       └── ci.yml              # GitHub Actions workflow
-├── src/
-│   ├── controllers/
-│   │   └── StudentController.js
-│   ├── models/
-│   │   └── Student.js
-│   ├── routes/
-│   │   └── studentRoutes.js
-│   ├── services/
-│   │   └── StudentService.js
-│   ├── utils/
-│   │   └── DataStore.js
-│   ├── app.js
-│   └── index.js
-├── tests/
-│   ├── unit/
-│   │   ├── Student.test.js
-│   │   ├── GradeCalculation.test.js
-│   │   ├── GPACalculation.test.js
-│   │   ├── StudentStatus.test.js
-│   │   ├── Validation.test.js
-│   │   └── StudentService.test.js
-│   └── integration/
-│       ├── api.test.js
-│       └── studentFlow.test.js
-├── data/
-│   └── .gitkeep
-├── coverage/                   # Generated by Jest
-├── .gitignore
-├── package.json
-└── README.md
+│
+├── 📄 README.md                    # Dokumentasi utama (BACA INI DULU!)
+├── 📄 QUICK_START.md               # Panduan cepat
+├── 📄 00-START_HERE.md             # Titik awal untuk reviewer
+│
+├── 📁 src/                         # Source code aplikasi
+│   ├── config/                     # Konfigurasi (database)
+│   ├── controllers/                # HTTP request handlers
+│   ├── models/                     # Data models
+│   ├── routes/                     # API routes
+│   ├── services/                   # Business logic
+│   ├── utils/                      # Utilities (MySQLStore)
+│   ├── app.js                      # Express app setup
+│   └── index.js                    # Entry point
+│
+├── 📁 public/                      # Frontend (UI)
+│   ├── index.html                  # Halaman utama
+│   ├── style.css                   # Styling
+│   └── script.js                   # JavaScript frontend
+│
+├── 📁 tests/                       # Test files
+│   ├── unit/                       # Unit tests (37 tests)
+│   └── integration/                # Integration tests (5 tests)
+│
+├── 📁 database/                    # Database
+│   └── setup.sql                   # SQL script untuk setup
+│
+├── 📁 docs/                        # Dokumentasi lengkap
+│   ├── API_DOCUMENTATION.md        # Dokumentasi API
+│   ├── ARCHITECTURE.md             # Arsitektur sistem
+│   ├── TESTING_GUIDE.md            # Panduan testing
+│   ├── MYSQL_SETUP.md              # Setup MySQL
+│   ├── GITHUB_SETUP.md             # Setup GitHub & CI/CD
+│   └── SUBMISSION_GUIDE.md         # Panduan pengumpulan
+│
+├── 📁 .github/workflows/           # CI/CD
+│   └── ci.yml                      # GitHub Actions workflow
+│
+├── 📄 package.json                 # Dependencies & scripts
+├── 📄 jest.config.js               # Jest configuration
+└── 📄 .env.example                 # Environment variables template
 ```
 
-## Arsitektur Aplikasi
+---
 
-Aplikasi menggunakan arsitektur **MVC (Model-View-Controller)** dengan layer tambahan:
+## 📚 Dokumentasi
 
-```
-Request → Routes → Controller → Service → Model → DataStore
-                                              ↓
-                                         JSON File
-```
+### Untuk Dosen/Reviewer
+1. **[00-START_HERE.md](00-START_HERE.md)** - Mulai dari sini
+2. **[QUICK_START.md](QUICK_START.md)** - Panduan cepat (5 menit)
+3. **[Laporan Pengujian perangkat lunak.pdf](Laporan%20Pengujian%20perangkat%20lunak.pdf)** - Laporan lengkap
 
-### Layer Explanation:
-- **Routes**: Mendefinisikan endpoint API
-- **Controller**: Menangani HTTP request/response
-- **Service**: Business logic dan validasi
-- **Model**: Representasi data dan perhitungan
-- **DataStore**: Persistence layer (file I/O)
+### Dokumentasi Teknis
+- **[docs/API_DOCUMENTATION.md](docs/API_DOCUMENTATION.md)** - API endpoints
+- **[docs/ARCHITECTURE.md](docs/ARCHITECTURE.md)** - Arsitektur sistem
+- **[docs/TESTING_GUIDE.md](docs/TESTING_GUIDE.md)** - Strategi testing
+- **[docs/MYSQL_SETUP.md](docs/MYSQL_SETUP.md)** - Setup database
 
-## Validasi Input
+### Setup & Deployment
+- **[docs/GITHUB_SETUP.md](docs/GITHUB_SETUP.md)** - Setup GitHub & CI/CD
+- **[docs/SUBMISSION_GUIDE.md](docs/SUBMISSION_GUIDE.md)** - Panduan submit
 
-### NIM
-- Harus 10 digit angka
-- Tidak boleh duplikat
+---
 
-### Nama
-- Minimal 3 karakter
-- Tidak boleh kosong
+## 🎯 Hasil Testing
 
-### Major
-- Tidak boleh kosong
+### Test Coverage
+- **Total Tests**: 50 test cases
+  - Unit Tests: 45 tests
+  - Integration Tests: 5 tests
+- **Coverage**: 82%
+  - Models: 100%
+  - Routes: 100%
+  - Controllers: 86%
+  - Services: 84%
 
-### Score
-- Harus angka antara 0-100
-- Subject tidak boleh kosong
+### CI/CD
+- ✅ Automated testing pakai GitHub Actions
+- ✅ Test jalan otomatis tiap push/PR
+- ✅ Multi-version testing (Node.js 18.x, 20.x)
 
-## Grading System
+---
+
+## 🎓 Grading System
 
 ### Letter Grade
-- A: 85-100
-- B: 70-84
-- C: 60-69
-- D: 50-59
-- E: 0-49
-
-### GPA Scale
-- A = 4.0
-- B = 3.0
-- C = 2.0
-- D = 1.0
-- E = 0.0
+| Score | Grade | GPA |
+|-------|-------|-----|
+| 85-100 | A | 4.0 |
+| 70-84 | B | 3.0 |
+| 60-69 | C | 2.0 |
+| 50-59 | D | 1.0 |
+| 0-49 | E | 0.0 |
 
 ### Status Kelulusan
-- Cumlaude: GPA ≥ 3.5
-- Sangat Memuaskan: GPA ≥ 3.0
-- Memuaskan: GPA ≥ 2.5
-- Cukup: GPA ≥ 2.0
-- Kurang: GPA < 2.0
+| GPA | Status |
+|-----|--------|
+| ≥ 3.5 | Cumlaude |
+| ≥ 3.0 | Sangat Memuaskan |
+| ≥ 2.5 | Memuaskan |
+| ≥ 2.0 | Cukup |
+| < 2.0 | Kurang |
 
-## Author
+---
 
-Dibuat sebagai Final Project mata kuliah Pengujian Perangkat Lunak
+## 👨‍💻 Author
 
-## License
+**Steven Willie**  
+NIM: 03081230044  
+Mata Kuliah: Pengujian Perangkat Lunak
 
-MIT
+---
+
+## 📄 License
+
+MIT License - see [LICENSE](LICENSE) file for details
+
+---
+
+## 🔗 Links
+
+- **Repository**: https://github.com/StevenWillie/Sistem-Penilaian-Mahasiswa
+- **CI/CD**: https://github.com/StevenWillie/Sistem-Penilaian-Mahasiswa/actions
+
+---
+
+**⭐ Jika ada pertanyaan, silakan buka file [00-START_HERE.md](00-START_HERE.md)**

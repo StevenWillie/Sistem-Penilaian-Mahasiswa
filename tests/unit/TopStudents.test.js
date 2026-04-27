@@ -1,56 +1,69 @@
 const StudentService = require('../../src/services/StudentService');
+const MySQLStore = require('../../src/utils/MySQLStore');
 
 describe('Top Students - Unit Tests', () => {
   let service;
+  let store;
 
-  beforeEach(() => {
-    service = new StudentService();
-    service.students = [];
+  beforeAll(() => {
+    store = new MySQLStore();
   });
 
-  test('should return top students sorted by GPA', () => {
-    const student1 = service.createStudent('1111111111', 'Alice', 'CS');
-    student1.addGrade('Math', 90); // GPA = 4.0
-    
-    const student2 = service.createStudent('2222222222', 'Bob', 'CS');
-    student2.addGrade('Math', 80); // GPA = 3.0
-    
-    const student3 = service.createStudent('3333333333', 'Charlie', 'CS');
-    student3.addGrade('Math', 85); // GPA = 4.0
+  beforeEach(async () => {
+    service = new StudentService();
+    await store.clearData();
+    // Small delay to ensure database is ready
+    await new Promise(resolve => setTimeout(resolve, 100));
+  });
 
-    const topStudents = service.getTopStudents(3);
+  afterEach(async () => {
+    await store.clearData();
+    // Small delay to ensure cleanup is complete
+    await new Promise(resolve => setTimeout(resolve, 100));
+  });
+
+  test('should return top students sorted by GPA', async () => {
+    const student1 = await service.createStudent('1111111111', 'Alice', 'CS');
+    await service.addGradeToStudent(student1.id, 'Math', 90); // GPA = 4.0
+    
+    const student2 = await service.createStudent('2222222222', 'Bob', 'CS');
+    await service.addGradeToStudent(student2.id, 'Math', 80); // GPA = 3.0
+    
+    const student3 = await service.createStudent('3333333333', 'Charlie', 'CS');
+    await service.addGradeToStudent(student3.id, 'Math', 85); // GPA = 4.0
+
+    const topStudents = await service.getTopStudents(3);
     
     expect(topStudents).toHaveLength(3);
-    expect(topStudents[0].name).toBe('Alice');
-    // Alice and Charlie both have GPA 4.0, so either could be first/second
-    expect([topStudents[1].name, topStudents[2].name]).toContain('Charlie');
-    expect([topStudents[1].name, topStudents[2].name]).toContain('Bob');
-  });
+    expect(topStudents[0].calculateGPA()).toBe(4.0);
+    expect(topStudents[2].calculateGPA()).toBe(3.0);
+  }, 10000);
 
-  test('should limit results based on limit parameter', () => {
+  test('should limit results based on limit parameter', async () => {
     for (let i = 0; i < 10; i++) {
-      const student = service.createStudent(`111111111${i}`, `Student${i}`, 'CS');
-      student.addGrade('Math', 80 + i);
+      const student = await service.createStudent(`111111111${i}`, `Student${i}`, 'CS');
+      await service.addGradeToStudent(student.id, 'Math', 80 + i);
     }
 
-    const top3 = service.getTopStudents(3);
+    const top3 = await service.getTopStudents(3);
     expect(top3).toHaveLength(3);
-  });
+  }, 15000);
 
-  test('should return all students if limit exceeds total', () => {
-    service.createStudent('1111111111', 'Alice', 'CS');
-    service.createStudent('2222222222', 'Bob', 'CS');
+  test('should return all students if limit exceeds total', async () => {
+    await service.createStudent('1111111111', 'Alice', 'CS');
+    await service.createStudent('2222222222', 'Bob', 'CS');
 
-    const top10 = service.getTopStudents(10);
+    const top10 = await service.getTopStudents(10);
     expect(top10).toHaveLength(2);
-  });
+  }, 10000);
 
-  test('should handle students with no grades', () => {
-    service.createStudent('1111111111', 'Alice', 'CS');
-    const student2 = service.createStudent('2222222222', 'Bob', 'CS');
-    student2.addGrade('Math', 85);
+  test('should handle students with no grades', async () => {
+    await service.createStudent('1111111111', 'Alice', 'CS');
+    const student2 = await service.createStudent('2222222222', 'Bob', 'CS');
+    await service.addGradeToStudent(student2.id, 'Math', 85);
 
-    const topStudents = service.getTopStudents(5);
+    const topStudents = await service.getTopStudents(5);
     expect(topStudents[0].name).toBe('Bob');
-  });
+    expect(topStudents[0].calculateGPA()).toBeGreaterThan(0);
+  }, 10000);
 });

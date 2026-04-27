@@ -41,6 +41,11 @@ npm run test:integration
 ```
 Menjalankan hanya integration tests (tests/integration/*.test.js).
 
+**Note:** Integration tests memerlukan MySQL database yang sudah running. Pastikan:
+- XAMPP MySQL sudah dijalankan
+- Database `db_mahasiswa` sudah dibuat
+- Tables sudah di-setup (jalankan `database/setup.sql`)
+
 ### Watch Mode (Development)
 ```bash
 npm run test:watch
@@ -287,8 +292,21 @@ Tests run automatically on:
 1. Checkout code
 2. Setup Node.js (v18, v20)
 3. Install dependencies
-4. Run tests with coverage
-5. Upload coverage report
+4. Setup MySQL database (service container)
+5. Verify application build
+6. Run tests with coverage
+7. Upload coverage report
+
+### MySQL in CI Environment
+
+GitHub Actions menggunakan MySQL service container:
+- Image: `mysql:8.0`
+- Database: `db_mahasiswa`
+- User: `root`
+- Password: (empty)
+- Port: `3306`
+
+Database di-setup otomatis menggunakan `database/setup.sql` sebelum tests dijalankan.
 
 ### Viewing CI Results
 

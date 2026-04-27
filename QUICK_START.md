@@ -1,197 +1,146 @@
-# Quick Start Guide - Sistem Penilaian Mahasiswa
+# 🚀 Quick Start Guide
 
-Panduan cepat untuk memulai proyek ini dalam 5 menit!
+Panduan cepat untuk menjalankan aplikasi dalam 5 menit!
+
+---
 
 ## 📋 Prerequisites
 
 - Node.js >= 18.0.0
-- npm atau yarn
-- Git
+- XAMPP (untuk MySQL)
 
-## 🚀 Installation
+---
 
-### 1. Clone Repository
-```bash
-git clone https://github.com/YOUR_USERNAME/sistem-penilaian-mahasiswa.git
-cd sistem-penilaian-mahasiswa
-```
+## ⚡ Langkah Cepat
 
-### 2. Install Dependencies
+### 1. Install Dependencies
 ```bash
 npm install
 ```
 
-### 3. Setup Environment (Optional)
+### 2. Setup MySQL
 ```bash
-cp .env.example .env
-# Edit .env jika perlu
+# 1. Start MySQL di XAMPP Control Panel
+# 2. Buka phpMyAdmin: http://localhost/phpmyadmin
+# 3. Klik tab "SQL"
+# 4. Copy-paste isi file: database/setup.sql
+# 5. Klik "Go"
 ```
 
-## ▶️ Running the Application
+**Panduan lengkap:** [docs/MYSQL_SETUP.md](docs/MYSQL_SETUP.md)
 
-### Start Server
+### 3. Jalankan Aplikasi
 ```bash
 npm start
 ```
 
-Server akan berjalan di: `http://localhost:3000`
-
-### Development Mode (with auto-reload)
-```bash
-npm run dev
+### 4. Buka Browser
+```
+http://localhost:3000
 ```
 
-## 🧪 Running Tests
+---
+
+## 🎨 Tampilan UI
+
+Anda akan melihat:
+- ✅ Form input mahasiswa (NIM, Nama, Jurusan)
+- ✅ Tabel daftar mahasiswa dengan GPA
+- ✅ Tombol "+ Nilai" untuk tambah nilai
+- ✅ Section "Top 5 Mahasiswa" untuk ranking
+- ✅ Tombol "Hapus" untuk delete
+
+---
+
+## 🧪 Testing
 
 ### Run All Tests
 ```bash
 npm test
 ```
 
-### Run Tests in Watch Mode
+**Output:**
+```
+✓ Test Suites: 10 passed, 10 total
+✓ Tests: 50 passed, 50 total
+✓ Coverage: 88.58%
+```
+
+### Lihat Coverage Report
 ```bash
-npm run test:watch
+# Setelah npm test, buka:
+coverage/lcov-report/index.html
 ```
-
-## 📝 Quick API Test
-
-### 1. Test API Info
-```bash
-curl http://localhost:3000
-```
-
-### 2. Create a Student
-```bash
-curl -X POST http://localhost:3000/api/students \
-  -H "Content-Type: application/json" \
-  -d '{
-    "nim": "1234567890",
-    "name": "John Doe",
-    "major": "Computer Science"
-  }'
-```
-
-### 3. Add Grade
-```bash
-curl -X POST http://localhost:3000/api/students/1/grades \
-  -H "Content-Type: application/json" \
-  -d '{
-    "subject": "Database",
-    "score": 85
-  }'
-```
-
-### 4. Get All Students
-```bash
-curl http://localhost:3000/api/students
-```
-
-### 5. Get Top Students
-```bash
-curl http://localhost:3000/api/students/top?limit=5
-```
-
-## 📊 View Test Coverage
-
-After running `npm test`:
-```bash
-# Open coverage report in browser
-open coverage/lcov-report/index.html
-# or on Windows
-start coverage/lcov-report/index.html
-```
-
-## 🔧 Common Commands
-
-| Command | Description |
-|---------|-------------|
-| `npm start` | Start production server |
-| `npm run dev` | Start development server |
-| `npm test` | Run all tests with coverage |
-| `npm run test:unit` | Run unit tests only |
-| `npm run test:integration` | Run integration tests only |
-| `npm run test:watch` | Run tests in watch mode |
-
-## 📚 Documentation
-
-- [README.md](README.md) - Overview & API endpoints
-- [API_DOCUMENTATION.md](API_DOCUMENTATION.md) - Detailed API docs
-- [TESTING_GUIDE.md](TESTING_GUIDE.md) - Testing guide
-- [LAPORAN_PROYEK.md](LAPORAN_PROYEK.md) - Project report
-- [CONTRIBUTING.md](CONTRIBUTING.md) - Contribution guidelines
-
-## 🎯 Project Structure
-
-```
-sistem-penilaian-mahasiswa/
-├── src/                    # Source code
-│   ├── controllers/        # Request handlers
-│   ├── models/            # Data models
-│   ├── routes/            # API routes
-│   ├── services/          # Business logic
-│   └── utils/             # Utilities
-├── tests/                 # Test files
-│   ├── unit/             # Unit tests
-│   └── integration/      # Integration tests
-├── data/                  # Data storage
-└── .github/workflows/     # CI/CD configuration
-```
-
-## ✅ Verify Installation
-
-Run this command to verify everything is working:
-```bash
-npm test
-```
-
-You should see:
-- ✓ All tests passing
-- Coverage report > 60%
-- No errors
-
-## 🐛 Troubleshooting
-
-### Port Already in Use
-```bash
-# Change port in .env or use:
-PORT=3001 npm start
-```
-
-### Tests Failing
-```bash
-# Clean install
-rm -rf node_modules package-lock.json
-npm install
-npm test
-```
-
-### Permission Errors
-```bash
-# On Linux/Mac
-sudo chown -R $USER:$USER .
-```
-
-## 🎓 Next Steps
-
-1. ✅ Read [API_DOCUMENTATION.md](API_DOCUMENTATION.md) for API details
-2. ✅ Read [TESTING_GUIDE.md](TESTING_GUIDE.md) for testing strategies
-3. ✅ Try creating students and adding grades via API
-4. ✅ Run tests and check coverage report
-5. ✅ Read [LAPORAN_PROYEK.md](LAPORAN_PROYEK.md) for project report
-
-## 💡 Tips
-
-- Use Postman or Insomnia for easier API testing
-- Check `coverage/lcov-report/index.html` for detailed coverage
-- Run `npm run test:watch` during development
-- Read the test files to understand how the system works
-
-## 🤝 Need Help?
-
-- Check [CONTRIBUTING.md](CONTRIBUTING.md) for contribution guidelines
-- Read [TESTING_GUIDE.md](TESTING_GUIDE.md) for testing help
-- Open an issue on GitHub
 
 ---
 
-**Happy Coding! 🚀**
+## 📝 Test Manual via UI
+
+1. **Tambah Mahasiswa**
+   - Isi NIM: `1234567890`
+   - Isi Nama: `John Doe`
+   - Isi Jurusan: `Computer Science`
+   - Klik "Simpan Mahasiswa"
+
+2. **Tambah Nilai**
+   - Klik tombol "+ Nilai" di tabel
+   - Isi Mata Kuliah: `Database`
+   - Isi Nilai: `85`
+   - Klik "Simpan Nilai"
+
+3. **Lihat GPA**
+   - GPA otomatis terhitung di tabel
+   - Status kelulusan muncul (Cumlaude, dll)
+
+4. **Lihat Ranking**
+   - Scroll ke bawah
+   - Lihat Top 5 Mahasiswa
+
+---
+
+## 🔧 Commands
+
+| Command | Deskripsi |
+|---------|-----------|
+| `npm start` | Jalankan aplikasi |
+| `npm test` | Run semua tests |
+| `npm run test:unit` | Run unit tests saja |
+| `npm run test:integration` | Run integration tests saja |
+| `npm run test:watch` | Watch mode (auto re-run) |
+
+---
+
+## 📚 Dokumentasi Lengkap
+
+- **[README.md](README.md)** - Dokumentasi utama
+- **[00-START_HERE.md](00-START_HERE.md)** - Panduan untuk dosen
+- **[docs/API_DOCUMENTATION.md](docs/API_DOCUMENTATION.md)** - API reference
+- **[docs/TESTING_GUIDE.md](docs/TESTING_GUIDE.md)** - Testing guide
+- **[docs/MYSQL_SETUP.md](docs/MYSQL_SETUP.md)** - Setup MySQL
+
+---
+
+## ❓ Troubleshooting
+
+### Error: "Database connection failed"
+**Solusi:**
+- Pastikan MySQL di XAMPP sudah running
+- Pastikan database `db_mahasiswa` sudah dibuat
+- Jalankan `database/setup.sql` di phpMyAdmin
+
+### Error: "Port 3000 already in use"
+**Solusi:**
+```bash
+# Gunakan port lain
+PORT=3001 npm start
+```
+
+### Error: "Module not found"
+**Solusi:**
+```bash
+npm install
+```
+
+---
+
+**Selamat! Aplikasi siap digunakan!** 🎉

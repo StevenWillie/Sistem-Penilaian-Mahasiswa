@@ -1,19 +1,20 @@
 const request = require('supertest');
 const app = require('../../src/app');
-const DataStore = require('../../src/utils/DataStore');
-const path = require('path');
+const MySQLStore = require('../../src/utils/MySQLStore');
 
 describe('API Integration Tests', () => {
-  let dataStore;
+  let store;
 
-  beforeEach(() => {
-    const testDataPath = path.join(__dirname, '../../data/test-students.json');
-    dataStore = new DataStore(testDataPath);
-    dataStore.clearData();
+  beforeAll(() => {
+    store = new MySQLStore();
   });
 
-  afterEach(() => {
-    dataStore.clearData();
+  beforeEach(async () => {
+    await store.clearData();
+  });
+
+  afterEach(async () => {
+    await store.clearData();
   });
 
   test('should create a new student via POST /api/students', async () => {

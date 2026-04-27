@@ -1,13 +1,23 @@
 const express = require('express');
 const bodyParser = require('body-parser');
+const path = require('path');
 const studentRoutes = require('./routes/studentRoutes');
 
 const app = express();
 
+// Serve static files
+app.use(express.static(path.join(__dirname, '../public')));
+
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
+// Root route - serve index.html
 app.get('/', (req, res) => {
+  res.sendFile(path.join(__dirname, '../public/index.html'));
+});
+
+// API info route
+app.get('/api', (req, res) => {
   res.json({
     message: 'Sistem Penilaian Mahasiswa API',
     version: '1.0.0',
